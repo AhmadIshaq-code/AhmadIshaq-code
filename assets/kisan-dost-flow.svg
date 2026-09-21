@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="448" viewBox="0 0 1000 448" role="img" aria-labelledby="kd-title kd-desc">
+  <title id="kd-title">Kisan Dost request flow</title>
+  <desc id="kd-desc">A farmer's question goes from the React app to a FastAPI backend, through an input guardrail to a triage agent. The triage agent hands off to one of six specialist agents (Agronomy, Pest Doctor, Weather, Market, Finance, Government support), each using its own tool or dataset. The result passes an output guardrail and streams back to the farmer.</desc>
+
+  <style>
+    .sans { font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; }
+    .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, "DejaVu Sans Mono", monospace; }
+    .name { font-size: 16px; font-weight: 600; fill: #E8EEF3; }
+    .sub  { font-size: 12.5px; fill: #8FA3B5; }
+    .rowname { font-size: 15px; font-weight: 600; fill: #E8EEF3; }
+    .tool { font-size: 12.5px; fill: #7FB99A; }
+    @media (prefers-reduced-motion: reduce) { .packet { display: none; } }
+  </style>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#6F93B1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- panel -->
+  <rect width="1000" height="448" rx="20" fill="#0E1B26"/>
+  <rect x="1" y="1" width="998" height="446" rx="19" fill="none" stroke="#24405A" stroke-width="2"/>
+
+  <!-- guardrail boundary: wraps the agent layer -->
+  <rect x="320" y="40" width="518" height="362" rx="14" fill="none" stroke="#4F7396" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text class="sans sub" x="338" y="64">input guardrail  →  agents &amp; tools  →  output guardrail</text>
+
+  <!-- connectors -->
+  <g fill="none" stroke="#3B5B78" stroke-width="1.5">
+    <path d="M152 235 H170" marker-end="url(#arr)"/>
+    <path d="M300 235 H338" marker-end="url(#arr)"/>
+    <path d="M448 235 H464"/>
+    <path d="M464 105 V365"/>
+    <path d="M464 105 H476" marker-end="url(#arr)"/>
+    <path d="M464 157 H476" marker-end="url(#arr)"/>
+    <path d="M464 209 H476" marker-end="url(#arr)"/>
+    <path d="M464 261 H476" marker-end="url(#arr)"/>
+    <path d="M464 313 H476" marker-end="url(#arr)"/>
+    <path d="M464 365 H476" marker-end="url(#arr)"/>
+    <path d="M602 105 H610"/>
+    <path d="M602 157 H610"/>
+    <path d="M602 209 H610"/>
+    <path d="M602 261 H610"/>
+    <path d="M602 313 H610"/>
+    <path d="M602 365 H610"/>
+    <path d="M806 105 H822 M806 157 H822 M806 209 H822 M806 261 H822 M806 313 H822 M806 365 H822"/>
+    <path d="M822 105 V365"/>
+    <path d="M822 235 H856" marker-end="url(#arr)"/>
+  </g>
+
+  <!-- request packet: only visible in the gaps, boxes below sit on top of it -->
+  <g class="packet" aria-hidden="true">
+    <circle r="9" fill="#E6B450" fill-opacity="0.22"/>
+    <circle r="4.5" fill="#E6B450"/>
+    <animateMotion dur="7s" repeatCount="indefinite" path="M24 235 H464 V105 H822 V235 H976"/>
+  </g>
+
+  <!-- app layer -->
+  <g>
+    <rect x="24" y="193" width="128" height="84" rx="10" fill="#14273A" stroke="#24405A" stroke-width="1.5"/>
+    <text class="sans name" x="88" y="231" text-anchor="middle">Farmer</text>
+    <text class="sans sub" x="88" y="252" text-anchor="middle">React · Vercel</text>
+
+    <rect x="172" y="193" width="128" height="84" rx="10" fill="#14273A" stroke="#24405A" stroke-width="1.5"/>
+    <text class="sans name" x="236" y="231" text-anchor="middle">FastAPI</text>
+    <text class="sans sub" x="236" y="252" text-anchor="middle">Railway</text>
+
+    <rect x="858" y="193" width="118" height="84" rx="10" fill="#14273A" stroke="#24405A" stroke-width="1.5"/>
+    <text class="sans name" x="917" y="231" text-anchor="middle">Answer</text>
+    <text class="sans sub" x="917" y="252" text-anchor="middle">streamed (SSE)</text>
+  </g>
+
+  <!-- triage agent -->
+  <rect x="340" y="193" width="108" height="84" rx="10" fill="#282D2B" stroke="#E6B450" stroke-opacity="0.75" stroke-width="1.5"/>
+  <text class="sans name" x="394" y="231" text-anchor="middle">Triage</text>
+  <text class="sans sub" x="394" y="252" text-anchor="middle">routes intent</text>
+
+  <!-- specialist agents + their tools -->
+  <g>
+    <rect x="478" y="84"  width="124" height="42" rx="8" fill="#14273A" stroke="#E6B450" stroke-opacity="0.55" stroke-width="1.2"/>
+    <text class="sans rowname" x="540" y="110" text-anchor="middle">Agronomy</text>
+    <rect x="610" y="84"  width="196" height="42" rx="8" fill="#192B32" stroke="#7FB99A" stroke-opacity="0.45" stroke-width="1.2"/>
+    <text class="mono tool" x="708" y="110" text-anchor="middle">crop_advisor</text>
+
+    <rect x="478" y="136" width="124" height="42" rx="8" fill="#14273A" stroke="#E6B450" stroke-opacity="0.55" stroke-width="1.2"/>
+    <text class="sans rowname" x="540" y="162" text-anchor="middle">Pest Doctor</text>
+    <rect x="610" y="136" width="196" height="42" rx="8" fill="#192B32" stroke="#7FB99A" stroke-opacity="0.45" stroke-width="1.2"/>
+    <text class="mono tool" x="708" y="162" text-anchor="middle">pest_disease_tool</text>
+
+    <rect x="478" y="188" width="124" height="42" rx="8" fill="#14273A" stroke="#E6B450" stroke-opacity="0.55" stroke-width="1.2"/>
+    <text class="sans rowname" x="540" y="214" text-anchor="middle">Weather</text>
+    <rect x="610" y="188" width="196" height="42" rx="8" fill="#192B32" stroke="#7FB99A" stroke-opacity="0.45" stroke-width="1.2"/>
+    <text class="mono tool" x="708" y="214" text-anchor="middle">Open-Meteo API</text>
+
+    <rect x="478" y="240" width="124" height="42" rx="8" fill="#14273A" stroke="#E6B450" stroke-opacity="0.55" stroke-width="1.2"/>
+    <text class="sans rowname" x="540" y="266" text-anchor="middle">Market</text>
+    <rect x="610" y="240" width="196" height="42" rx="8" fill="#192B32" stroke="#7FB99A" stroke-opacity="0.45" stroke-width="1.2"/>
+    <text class="mono tool" x="708" y="266" text-anchor="middle">mandi prices (demo)</text>
+
+    <rect x="478" y="292" width="124" height="42" rx="8" fill="#14273A" stroke="#E6B450" stroke-opacity="0.55" stroke-width="1.2"/>
+    <text class="sans rowname" x="540" y="318" text-anchor="middle">Finance</text>
+    <rect x="610" y="292" width="196" height="42" rx="8" fill="#192B32" stroke="#7FB99A" stroke-opacity="0.45" stroke-width="1.2"/>
+    <text class="mono tool" x="708" y="318" text-anchor="middle">cost &amp; profit math</text>
+
+    <rect x="478" y="344" width="124" height="42" rx="8" fill="#14273A" stroke="#E6B450" stroke-opacity="0.55" stroke-width="1.2"/>
+    <text class="sans rowname" x="540" y="370" text-anchor="middle">Govt. support</text>
+    <rect x="610" y="344" width="196" height="42" rx="8" fill="#192B32" stroke="#7FB99A" stroke-opacity="0.45" stroke-width="1.2"/>
+    <text class="mono tool" x="708" y="370" text-anchor="middle">scheme data (demo)</text>
+  </g>
+
+  <!-- legend -->
+  <g class="sans sub" aria-hidden="true">
+    <rect x="24" y="418" width="10" height="10" rx="2" fill="#282D2B" stroke="#E6B450" stroke-width="1.2"/>
+    <text x="42" y="428">agents</text>
+    <rect x="104" y="418" width="10" height="10" rx="2" fill="#192B32" stroke="#7FB99A" stroke-width="1.2"/>
+    <text x="122" y="428">tools &amp; data</text>
+    <rect x="212" y="418" width="10" height="10" rx="2" fill="#14273A" stroke="#24405A" stroke-width="1.2"/>
+    <text x="230" y="428">app layer</text>
+    <path d="M304 423 H324" stroke="#4F7396" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="332" y="428">guardrails</text>
+  </g>
+</svg>
